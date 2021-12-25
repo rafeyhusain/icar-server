@@ -1,0 +1,38 @@
+# baseURL
+@baseURL = http://localhost:4000
+
+###
+# Find All Cars
+GET {{ baseURL }}/cars
+
+###
+# Find Car By Id
+GET {{ baseURL }}/cars/1
+
+###
+# Create Car
+POST {{ baseURL }}/cars
+Content-Type: application/json
+
+{
+    "year": 2021,
+	"make": "Honda",
+	"fuel": 10.3,
+	"maintenance": 7.5
+}
+
+###
+# Modify Car By Id
+PUT {{ baseURL }}/cars/4
+Content-Type: application/json
+
+{
+    "year": 2021,
+	"make": "Audi",
+	"fuel": 10.3,
+	"maintenance": 7.5
+}
+
+###
+# Delete Car By Id
+DELETE {{ baseURL }}/cars/4
