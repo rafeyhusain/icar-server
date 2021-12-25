@@ -10,6 +10,40 @@ GET {{ baseURL }}/cars
 GET {{ baseURL }}/cars/1
 
 ###
+POST {{ baseURL }}/cars/filter
+Content-Type: application/json
+
+{
+	"make": "Honda"
+}
+
+###
+POST {{ baseURL }}/cars/filter
+Content-Type: application/json
+
+{
+	"year": 2022
+}
+
+###
+POST {{ baseURL }}/cars/filter
+Content-Type: application/json
+
+{
+	"year": 0,
+	"make": ""
+}
+
+###
+POST {{ baseURL }}/cars/recommend
+Content-Type: application/json
+
+{
+	"fuelPrice": 0.73,
+	"distance": 250
+}
+
+###
 # Create Car
 POST {{ baseURL }}/cars
 Content-Type: application/json

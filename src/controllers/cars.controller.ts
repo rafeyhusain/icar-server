@@ -16,6 +16,26 @@ class CarsController {
     }
   };
 
+  public filterCars = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const findAllCarsData: Car[] = await this.carService.filterCars(req.body);
+
+      res.status(200).json({ data: findAllCarsData, message: 'filterCars' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public recommendCars = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const findAllCarsData: Car[] = await this.carService.recommendCars(req.body);
+
+      res.status(200).json({ data: findAllCarsData, message: 'recommendCars' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public getCarById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const carId = Number(req.params.id);

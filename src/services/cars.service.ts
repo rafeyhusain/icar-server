@@ -13,6 +13,51 @@ class CarService {
     return cars;
   }
 
+  public async filterCars(query: Car): Promise<Car[]> {
+    let cars: Car[] = null;
+
+    if (query.year == 0 && query.make == "") {
+      cars = this.cars
+    } else {
+
+      cars = this.cars.filter(
+        car => {
+          let result = query.year > 0 && query.year === car.year
+
+          result = result || query.make && car.make.toLowerCase().indexOf(query.make.toLowerCase()) >= 0
+
+          return result;
+        }
+      );
+    }
+
+    return cars;
+  }
+
+  /*
+    As a car dealer, I want to recommend to my clients the car with the lowest 
+    total annual cost over a period of four (4) years.
+    - Given the price of fuel (€/L) and the expected distance to travel each month (km/month).
+    - Relevant car parameters are price of the car (€), fuel consumption (km/l), and annual maintenance cost.
+    - Example:
+    Given that I expect to travel 250 km each month for the next 4 years, and the expected price of fuel is 0.73
+    €/L, what is the ranking of cars according to their total annual cost?
+  */
+  public async recommendCars(query: { fuelPrice: number, distance: number }): Promise<Car[]> {
+    const cars = this.cars.map((car) => {
+      let carx = {
+        ...car,
+        cost: (car.maintenance + (car.fuel / query.fuelPrice) * query.distance * 12).toFixed(2)
+      };
+
+      return carx;
+    });
+
+    cars.sort((a: any, b: any) => a.cost - b.cost)
+
+    return cars;
+  }
+
   public async findCarById(carId: number): Promise<Car> {
     const findCar: Car = this.cars.find(car => car.id === carId);
     if (!findCar) throw new HttpException(409, "You're not car");

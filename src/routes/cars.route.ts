@@ -15,6 +15,8 @@ class CarsRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.carsController.getCars);
+    this.router.post(`${this.path}/filter`, this.carsController.filterCars);
+    this.router.post(`${this.path}/recommend`, this.carsController.recommendCars);
     this.router.get(`${this.path}/:id(\\d+)`, this.carsController.getCarById);
     this.router.post(`${this.path}`, validationMiddleware(CreateCarDto, 'body'), this.carsController.createCar);
     this.router.put(`${this.path}/:id(\\d+)`, validationMiddleware(CreateCarDto, 'body', true), this.carsController.updateCar);
