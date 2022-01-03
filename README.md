@@ -10,7 +10,7 @@ To install
 npm i
 ```
 
-To run server
+To run server, first rename .env.example to .env and then
 
 ```sh
 npm run start
